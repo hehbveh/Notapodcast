@@ -12,4 +12,3 @@ xml = r.text.replace(old, new)
 
 with open("omny.xml", "w", encoding="utf-8") as f:
     f.write(xml)
-
