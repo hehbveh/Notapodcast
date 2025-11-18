@@ -2,7 +2,7 @@ name: Update Omny XML
 
 on:
   schedule:
-    - cron: "0 10 * * *"   # 10:00 UTC daily
+    - cron: "0 15 * * *"   # Runs every day at 10:00 AM New York time
   workflow_dispatch:
 
 permissions:
