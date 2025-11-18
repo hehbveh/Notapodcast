@@ -1,0 +1,32 @@
+name: Update Omny XML
+
+on:
+  schedule:
+    - cron: "0 10 * * *"   # 10:00 UTC daily
+  workflow_dispatch:
+
+jobs:
+  update-xml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Run update script
+        run: python update_xml.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add omny.xml
+          git commit -m "Daily Omny XML update" || exit 0
+          git push
